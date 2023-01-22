@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
+using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public class Player : MonoBehaviour
 {
@@ -11,10 +14,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Camera camera;
 
+    [SerializeField]
+    private RawImage joystick;
+
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb;
     private Vector2 movement;
-    private Vector2 touchOrigin = -Vector2.one;
+    private Vector2 touchOrigin;
 
     void Awake()
     {
@@ -46,6 +52,48 @@ public class Player : MonoBehaviour
     void OnMove(InputValue axis)
     {
         movement = axis.Get<Vector2>();
-        Debug.Log(movement);
+    }
+
+    void TouchOnFingerDown(Finger obj)
+    {
+        touchOrigin = obj.screenPosition;        
+    }
+
+    void TouchOnFingerUp(Finger obj)
+    {        
+        movement = Vector2.zero;        
+    }
+
+    void TouchOnFingerMove(Finger obj)
+    {        
+        var touchDif = camera.ScreenToWorldPoint(obj.screenPosition) - camera.ScreenToWorldPoint(touchOrigin);
+        if (touchDif.x > 1)
+            touchDif.x = 1;
+        else if (touchDif.x < -1)
+            touchDif.x = -1;
+
+        if (touchDif.y > 1)
+            touchDif.y = 1;
+        else if (touchDif.y < -1)
+            touchDif.y = -1;
+
+        movement = touchDif;
+    }
+
+    void OnEnable() 
+    {
+        EnhancedTouchSupport.Enable(); 
+        ETouch.Touch.onFingerDown += TouchOnFingerDown;
+        ETouch.Touch.onFingerUp += TouchOnFingerUp;
+        ETouch.Touch.onFingerMove += TouchOnFingerMove;
+    }
+
+
+    void OnDisable() 
+    {
+        ETouch.Touch.onFingerDown -= TouchOnFingerDown;
+        ETouch.Touch.onFingerUp -= TouchOnFingerUp;
+        ETouch.Touch.onFingerMove -= TouchOnFingerMove;
+        EnhancedTouchSupport.Disable();            
     }
 }

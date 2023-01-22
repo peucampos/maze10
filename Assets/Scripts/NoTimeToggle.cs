@@ -8,7 +8,6 @@ public class NoTimeToggle : MonoBehaviour
 {    
     public void ToggleonValueChanged(Toggle change) 
     {
-        Debug.Log(change.isOn);
         MazeRenderer.noTime = change.isOn;
     }      
 }

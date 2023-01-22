@@ -12,4 +12,8 @@ public class MenuActions : MonoBehaviour
     public void ExitBtn(){
         Application.Quit();
     }
+
+    public void GameOverBackBtn(){
+        SceneManager.LoadScene(0);
+    }
 }
