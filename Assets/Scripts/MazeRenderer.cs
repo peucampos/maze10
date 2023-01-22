@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -19,7 +20,12 @@ public class MazeRenderer : MonoBehaviour
     private Transform doorPrefab = null;
     
     [SerializeField]
-    private TMP_Text levelTime;
+    private TMP_Text level;
+    
+    [SerializeField]
+    private TMP_Text time;
+
+    public static bool noTime = false;
 
     private int width;
     private int height;
@@ -38,13 +44,15 @@ public class MazeRenderer : MonoBehaviour
         if (OpenDoor.time > 0)
         {
             OpenDoor.time -= Time.deltaTime;
-            levelTime.text = OpenDoor.time.ToString("0") + " - " + (OpenDoor.level-2).ToString();
+            time.text = OpenDoor.time.ToString("0");
+            level.text = (OpenDoor.level-2).ToString();
         }
         else
         {
             OpenDoor.time = 10;
             OpenDoor.level = 3;
-            SceneManager.LoadScene(2);            
+            if (!noTime)
+                SceneManager.LoadScene(2);            
         }
             
     }
