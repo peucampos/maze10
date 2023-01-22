@@ -12,39 +12,69 @@ public class Player : MonoBehaviour
     private float speed;
 
     [SerializeField]
-    private Camera camera;
+    private RawImage joystick;
 
     [SerializeField]
-    private RawImage joystick;
+    private GameObject targetIndicator;
+
+    [SerializeField]
+    private Transform arrow;
+
+    [SerializeField]
+    private Camera camera;
 
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb;
     private Vector2 movement;
     private Vector2 touchOrigin;
+    bool facingLeft = true;
+
 
     void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
+        arrow.GetComponent<Renderer>().enabled = false;
     }
 
     void Update()
     {
+        //make sure zoom is out for phones in Portrait and Landscape
         if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeRight)
-            camera.orthographicSize = 5;
+            camera.orthographicSize = 7.5f;
         else
-            camera.orthographicSize = 10;
+            camera.orthographicSize = 15f;
     }
 
     void FixedUpdate()
     {
-
         //flip
         if (movement.x > 0)
+        {
             transform.localScale = Vector3.one;
+            facingLeft = true;
+        }
         else if (movement.x < 0)
+        {
             transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
-    
+            facingLeft = false;
+        }
+        
+        //indication arrow
+        Vector2 dir = MazeRenderer.exitDoor.position - targetIndicator.transform.position;
+        if (Mathf.Abs(dir.x) + Mathf.Abs(dir.y) > 20)
+        {
+            arrow.GetComponent<Renderer>().enabled = true;
+            float angle = 0;
+            if (facingLeft)
+                angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            else
+                angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+            targetIndicator.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+        else
+            arrow.GetComponent<Renderer>().enabled = false;
+
         //move
         rb.velocity = movement * speed;
     }

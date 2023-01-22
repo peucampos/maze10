@@ -26,7 +26,9 @@ public class MazeRenderer : MonoBehaviour
     private TMP_Text time;
 
     public static bool noTime = false;
-
+    public static Transform exitDoor = null;
+    
+    bool doorSpawned = false; //for corners where can be 2 doors
     private int width;
     private int height;
     private float size = 5;
@@ -57,12 +59,18 @@ public class MazeRenderer : MonoBehaviour
             
     }
 
+    void SpawnDoor(Transform wall)
+    {
+        exitDoor = Instantiate(doorPrefab);
+        exitDoor.position = new Vector3(wall.position.x, wall.position.y, exitDoor.position.z);
+        doorSpawned = true;
+    }
+
     private void Draw(WallState[,] maze)
     {
         //randomly spawn char and door
         Position charSpawnPos = new Position { X = Random.Range(0, width-1), Y =  Random.Range(0, height-1) };
         Position doorSpawnPos = DefineDoorPosition();
-        bool doorSpawned = false; //for corners where can be 2 doors
 
         for (int i = 0; i < width; i++)
         {
@@ -82,11 +90,7 @@ public class MazeRenderer : MonoBehaviour
                     topWall.localScale = new Vector3(size, topWall.localScale.y, topWall.localScale.z);
 
                     if (!doorSpawned && j == height-1 && doorSpawnPos.X == i && doorSpawnPos.Y == j)
-                    {
-                        var door = Instantiate(doorPrefab);
-                        door.position = new Vector3(topWall.position.x, topWall.position.y, door.position.z);
-                        doorSpawned = true;
-                    }
+                        SpawnDoor(topWall);
                 }
 
                 if (cell.HasFlag(WallState.LEFT))
@@ -96,11 +100,7 @@ public class MazeRenderer : MonoBehaviour
                     leftWall.localScale = new Vector3(leftWall.localScale.y, size, leftWall.localScale.z);
 
                     if (!doorSpawned && i == 0 && doorSpawnPos.X == i && doorSpawnPos.Y == j)
-                    {
-                        var door = Instantiate(doorPrefab);
-                        door.position = new Vector3(leftWall.position.x, leftWall.position.y, door.position.z);
-                        doorSpawned = true;                 
-                    }
+                        SpawnDoor(leftWall);
                 }
 
                 if (i == width - 1)
@@ -112,12 +112,7 @@ public class MazeRenderer : MonoBehaviour
                         rightWall.localScale = new Vector3(rightWall.localScale.y, size, rightWall.localScale.z);
 
                         if (!doorSpawned && doorSpawnPos.X == i && doorSpawnPos.Y == j)
-                        {
-                            var door = Instantiate(doorPrefab);
-                            door.position = new Vector3(rightWall.position.x, rightWall.position.y, door.position.z);
-
-                            doorSpawned = true;                 
-                        }
+                            SpawnDoor(rightWall);
                     }
                 }
 
@@ -130,11 +125,7 @@ public class MazeRenderer : MonoBehaviour
                         bottomWall.localScale = new Vector3(size, bottomWall.localScale.y, bottomWall.localScale.z);
 
                         if (!doorSpawned && doorSpawnPos.X == i && doorSpawnPos.Y == j)
-                        {
-                            var door = Instantiate(doorPrefab);
-                            door.position = new Vector3(bottomWall.position.x, bottomWall.position.y, door.position.z);
-                            doorSpawned = true;                  
-                        }
+                            SpawnDoor(bottomWall);
                     }
                 }
             }
