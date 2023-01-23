@@ -25,6 +25,9 @@ public class MazeRenderer : MonoBehaviour
     [SerializeField]
     private TMP_Text time;
 
+    [SerializeField]
+    private RectTransform fader;
+
     public static bool noTime = false;
     public static Transform exitDoor = null;
     
@@ -53,8 +56,10 @@ public class MazeRenderer : MonoBehaviour
         {
             OpenDoor.time = 10;
             OpenDoor.level = 3;
-            if (!noTime)
+            fader.gameObject.SetActive(true);            
+            LeanTween.alpha(fader, 1f, 1f).setOnComplete(() => {                
                 SceneManager.LoadScene(2);            
+            });
         }
             
     }
