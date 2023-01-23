@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -12,6 +13,9 @@ public class MenuActions : MonoBehaviour
     [SerializeField]
     private TMP_Text pauseText;
 
+    [SerializeField]
+    private Toggle soundToggle;
+
     private bool isPaused = false;
         
     private void Start() {
@@ -19,6 +23,8 @@ public class MenuActions : MonoBehaviour
         LeanTween.alpha(fader, 0f, 1f).setOnComplete(() => {
             fader.gameObject.SetActive(false);
         });
+        if (soundToggle != null)
+            soundToggle.isOn = SoundManager.soundOn;
     }
 
     public void PlayBtn(){
@@ -33,6 +39,10 @@ public class MenuActions : MonoBehaviour
         LeanTween.alpha(fader, 1f, 1f).setOnComplete(() => {
             Application.Quit();
         });        
+    }
+    
+    public void SoundBtn(bool value){
+        SoundManager.soundOn = value;
     }
 
     public void GameOverBackBtn(){

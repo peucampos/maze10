@@ -28,7 +28,6 @@ public class MazeRenderer : MonoBehaviour
     [SerializeField]
     private RectTransform fader;
 
-    AudioSource audioSource;
     [SerializeField]
     AudioClip[] audioDrums;
     bool drumsPlayed = false;
@@ -46,7 +45,6 @@ public class MazeRenderer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        audioSource = GetComponent<AudioSource>();
         width = height = OpenDoor.level;
         var maze = MazeGenerator.Generate(width, height);
         Draw(maze);
@@ -62,21 +60,25 @@ public class MazeRenderer : MonoBehaviour
 
             if (OpenDoor.level > 3 && OpenDoor.time < 10 && !drumsPlayed)
             {
-                audioSource.PlayOneShot(audioDrums[Random.Range(0,audioDrums.Length)]);
+                SoundManager.PlaySound(audioDrums[Random.Range(0,audioDrums.Length)]);
                 drumsPlayed = true;
+                time.color = Color.red;
             }
             else if (OpenDoor.time > 10 && drumsPlayed)
+            {
                 drumsPlayed = false;
+                time.color = Color.white;
+            }
         }
         else
         {
-            OpenDoor.time = 10;
-            OpenDoor.level = 3;
-            audioSource.PlayOneShot(audioDeath[Random.Range(0,audioDeath.Length)]);
-            fader.gameObject.SetActive(true);          
-            LeanTween.alpha(fader, 1f, 1f).setOnComplete(() => {                
-                SceneManager.LoadScene(2);            
-            });
+            SoundManager.PlaySound(audioDeath[Random.Range(0,audioDeath.Length)]);            
+            SceneManager.LoadScene(2);            
+            // fader.gameObject.SetActive(true);     
+            // LeanTween.alpha(fader, 1f, 1f).setOnComplete(() => {                
+            //     OpenDoor.time = 10;
+            //     OpenDoor.level = 3;
+            // });
         }
             
     }
