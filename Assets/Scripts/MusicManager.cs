@@ -12,7 +12,7 @@ public class MusicManager : MonoBehaviour
 
     void Awake ()
     {
-        var source = obj.GetComponent<AudioSource>();
-        source.PlayOneShot(musics[Random.Range(0, musics.Length)], 0.25f); //Plays the audio.
+        // var source = obj.GetComponent<AudioSource>();
+        // source.PlayOneShot(musics[Random.Range(0, musics.Length)], 0.25f); //Plays the audio.
     }
 }

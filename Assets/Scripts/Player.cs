@@ -12,14 +12,14 @@ public class Player : MonoBehaviour
     private float speed;
 
     [SerializeField]
-    private RawImage joystick;
+    private Joystick joystick;
 
     [SerializeField]
     private GameObject targetIndicator;
 
     [SerializeField]
     private Transform arrow;
-
+    
     [SerializeField]
     private Camera camera;
 
@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb;
     private Vector2 movement;
-    private Vector2 touchOrigin;
 
     void Awake()
     {
@@ -64,6 +63,7 @@ public class Player : MonoBehaviour
         else
             arrow.GetComponent<Renderer>().enabled = false;
         //move
+        movement = joystick.Direction;
         rb.velocity = movement * speed;
     }
 
@@ -73,52 +73,8 @@ public class Player : MonoBehaviour
         sprite.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-
     void OnMove(InputValue axis)
     {
         movement = axis.Get<Vector2>();
-    }
-
-    void TouchOnFingerDown(Finger obj)
-    {
-        touchOrigin = obj.screenPosition;        
-    }
-
-    void TouchOnFingerUp(Finger obj)
-    {        
-        movement = Vector2.zero;
-    }
-
-    void TouchOnFingerMove(Finger obj)
-    {        
-        var touchDif = camera.ScreenToWorldPoint(obj.screenPosition) - camera.ScreenToWorldPoint(touchOrigin);
-        if (touchDif.x > 1)
-            touchDif.x = 1;        
-        else if (touchDif.x < -1)
-            touchDif.x = -1;
-
-        if (touchDif.y > 1)
-            touchDif.y = 1;
-        else if (touchDif.y < -1)
-            touchDif.y = -1;
-
-        movement = touchDif;
-    }
-
-    void OnEnable() 
-    {
-        EnhancedTouchSupport.Enable(); 
-        ETouch.Touch.onFingerDown += TouchOnFingerDown;
-        ETouch.Touch.onFingerUp += TouchOnFingerUp;
-        ETouch.Touch.onFingerMove += TouchOnFingerMove;
-    }
-
-
-    void OnDisable() 
-    {
-        ETouch.Touch.onFingerDown -= TouchOnFingerDown;
-        ETouch.Touch.onFingerUp -= TouchOnFingerUp;
-        ETouch.Touch.onFingerMove -= TouchOnFingerMove;
-        EnhancedTouchSupport.Disable();            
-    }
+    }    
 }
