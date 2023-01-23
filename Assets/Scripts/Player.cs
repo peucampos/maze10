@@ -23,12 +23,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Camera camera;
 
+    [SerializeField]
+    private GameObject sprite;
+
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb;
     private Vector2 movement;
     private Vector2 touchOrigin;
-    bool facingLeft = true;
-
 
     void Awake()
     {
@@ -48,36 +49,30 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        //flip
-        if (movement.x > 0)
-        {
-            transform.localScale = Vector3.one;
-            facingLeft = true;
-        }
-        else if (movement.x < 0)
-        {
-            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
-            facingLeft = false;
-        }
-        
+        if (movement != Vector2.zero)
+            SpriteRotation();
+
         //indication arrow
         Vector2 dir = MazeRenderer.exitDoor.position - targetIndicator.transform.position;
         if (Mathf.Abs(dir.x) + Mathf.Abs(dir.y) > 20)
         {
             arrow.GetComponent<Renderer>().enabled = true;
             float angle = 0;
-            if (facingLeft)
-                angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            else
-                angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+            angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             targetIndicator.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
         else
             arrow.GetComponent<Renderer>().enabled = false;
-
         //move
         rb.velocity = movement * speed;
     }
+
+    void SpriteRotation()
+    {        
+        var angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
+        sprite.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
 
     void OnMove(InputValue axis)
     {
@@ -91,14 +86,14 @@ public class Player : MonoBehaviour
 
     void TouchOnFingerUp(Finger obj)
     {        
-        movement = Vector2.zero;        
+        movement = Vector2.zero;
     }
 
     void TouchOnFingerMove(Finger obj)
     {        
         var touchDif = camera.ScreenToWorldPoint(obj.screenPosition) - camera.ScreenToWorldPoint(touchOrigin);
         if (touchDif.x > 1)
-            touchDif.x = 1;
+            touchDif.x = 1;        
         else if (touchDif.x < -1)
             touchDif.x = -1;
 
