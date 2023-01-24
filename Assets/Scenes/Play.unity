@@ -641,6 +641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fader: {fileID: 583869904}
   pauseText: {fileID: 670350463}
+  versionText: {fileID: 0}
   soundToggle: {fileID: 0}
 --- !u!1 &1492706102
 GameObject:
@@ -697,6 +698,7 @@ MonoBehaviour:
   - {fileID: 6427501585505882016, guid: 46a2f88750370be44815514384b9df2c, type: 3}
   - {fileID: 4805738410724536036, guid: 61b2546a70f32a84aab3774babf3f0fb, type: 3}
   - {fileID: 1925555440955851462, guid: f761984c33be3324eaa3fc7e0f63cbcd, type: 3}
+  pickupPrefabs: {fileID: 2306463420761447165, guid: 36c55ae565e9f4640a4a069d5f5c79a0, type: 3}
   level: {fileID: 1984205146}
   time: {fileID: 1575774556}
   fader: {fileID: 583869904}
@@ -1102,7 +1104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771911834}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -21,6 +21,9 @@ public class MazeRenderer : MonoBehaviour
 
     [SerializeField]
     private Transform[] floorPrefabs = null;
+
+    [SerializeField]
+    private Transform pickupPrefabs = null;
     
     [SerializeField]
     private TMP_Text level;
@@ -107,6 +110,11 @@ public class MazeRenderer : MonoBehaviour
                 // spawn char
                 if (charSpawnPos.X == i && charSpawnPos.Y == j)
                     character.position = new Vector3(position.x, position.y, character.position.z);
+                else
+                {
+                    var pickup = Instantiate(pickupPrefabs, transform) as Transform;
+                    pickup.position = new Vector3(position.x, position.y, pickup.position.z);    
+                }
 
                 //spawn floor
                 var floor = Instantiate(floorSelected, transform) as Transform;
