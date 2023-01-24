@@ -837,16 +837,15 @@ MonoBehaviour:
   score: {fileID: 1193940170}
   time: {fileID: 1575774556}
   fader: {fileID: 583869904}
-  audioDrums:
-  - {fileID: 8300000, guid: 51a9533fe3508724db4731fc2a89fd49, type: 3}
-  - {fileID: 8300000, guid: 6d30726d3235c384d9f9f5b597194d2f, type: 3}
-  - {fileID: 8300000, guid: bd1a0b64ab341c74c86164255afb484a, type: 3}
+  audioSFX:
+  - {fileID: 8300000, guid: 9d22bd8205f03994ab01614284e40cbc, type: 3}
+  - {fileID: 8300000, guid: ed11c0cc031b2f145b89766b6c860500, type: 3}
+  - {fileID: 8300000, guid: 4e5bf9bae0d061f45bf755376e92d62d, type: 3}
   audioDeath:
   - {fileID: 8300000, guid: d8cae7eede59d1c46a04939077829dd7, type: 3}
   - {fileID: 8300000, guid: 18ee2d315677935409ea51e5f49eb73e, type: 3}
   - {fileID: 8300000, guid: 77c2c2ada8a9990419b9ab9c44cfd650, type: 3}
   - {fileID: 8300000, guid: 156848b7e9dbd2c4aa13da2e637dee48, type: 3}
-  audioStep: {fileID: 8300000, guid: 3f5512ddbb38e6e4f86892cff21d0f0a, type: 3}
 --- !u!82 &1492706105
 AudioSource:
   m_ObjectHideFlags: 0
