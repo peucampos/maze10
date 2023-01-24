@@ -37,11 +37,6 @@ public class MazeRenderer : MonoBehaviour
     [SerializeField]
     private RectTransform fader;
 
-    [SerializeField]
-    AudioClip[] audioSFX;
-    [SerializeField]
-    AudioClip[] audioDeath;
-
     public static bool noTime = false;
     public static Transform exitDoor = null;
     
@@ -69,21 +64,9 @@ public class MazeRenderer : MonoBehaviour
             level.text = OpenDoor.level.ToString();
 
             score.text = OpenDoor.score.ToString();
-
-            var playingSFX = false;
-            var timeToSFX = Mathf.RoundToInt(OpenDoor.time % 12);
-            if (timeToSFX == 0 && !playingSFX)
-            {
-                playingSFX = true;
-                SoundManager.PlaySound(audioSFX[Random.Range(0,audioSFX.Length)],0.2f);
-            }
-            else if (timeToSFX > 0 && playingSFX)
-                playingSFX = false;
-
         }
         else
         {
-            SoundManager.PlaySound(audioDeath[Random.Range(0,audioDeath.Length)]); 
             SceneManager.LoadScene(2);      
         }
             

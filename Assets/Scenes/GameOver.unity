@@ -627,6 +627,7 @@ MonoBehaviour:
   fader: {fileID: 8467135}
   scoreText: {fileID: 850828919}
   levelText: {fileID: 981432486}
+  deathClip: {fileID: 8300000, guid: ba00a105d8168934b87261ebce25c572, type: 3}
 --- !u!1 &850828917
 GameObject:
   m_ObjectHideFlags: 0

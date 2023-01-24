@@ -15,6 +15,9 @@ public class GameOver : MonoBehaviour
     [SerializeField]
     TMP_Text levelText;
 
+    [SerializeField]
+    AudioClip deathClip;
+
     void Start()
     {
             fader.gameObject.SetActive(true);
@@ -27,7 +30,9 @@ public class GameOver : MonoBehaviour
 
             OpenDoor.time = 10;
             OpenDoor.level = 1;      
-            OpenDoor.score = 0;          
+            OpenDoor.score = 0;      
+
+            SoundManager.PlaySound(deathClip);
     }
 
     
