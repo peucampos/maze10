@@ -301,12 +301,12 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583869903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1385143299}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -753,8 +753,8 @@ RectTransform:
   - {fileID: 1575774555}
   - {fileID: 1799966012}
   - {fileID: 670350462}
-  - {fileID: 583869904}
   - {fileID: 867158466179875583}
+  - {fileID: 583869904}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -846,6 +846,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 18ee2d315677935409ea51e5f49eb73e, type: 3}
   - {fileID: 8300000, guid: 77c2c2ada8a9990419b9ab9c44cfd650, type: 3}
   - {fileID: 8300000, guid: 156848b7e9dbd2c4aa13da2e637dee48, type: 3}
+  audioStep: {fileID: 8300000, guid: 3f5512ddbb38e6e4f86892cff21d0f0a, type: 3}
 --- !u!82 &1492706105
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1938,7 +1939,7 @@ RectTransform:
   m_Children:
   - {fileID: 867158465051297633}
   m_Father: {fileID: 1385143299}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

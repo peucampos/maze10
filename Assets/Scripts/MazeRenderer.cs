@@ -99,9 +99,11 @@ public class MazeRenderer : MonoBehaviour
 
     private void Draw(WallState[,] maze)
     {
-        //randomly spawn char and door
-        Position charSpawnPos = new Position { X = Random.Range(0, width-1), Y =  Random.Range(0, height-1) };
+        //randomly spawn door
         Position doorSpawnPos = DefineDoorPosition();
+        //spawn char at the oposite side of the maze
+        Position charSpawnPos = new Position { X = width-1-doorSpawnPos.X, Y =  height-1-doorSpawnPos.Y };
+
         Transform floorSelected = floorPrefabs[Random.Range(0, floorPrefabs.Length)];
 
         for (int i = 0; i < width; i++)

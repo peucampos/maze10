@@ -104,7 +104,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -126,9 +126,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClipArray:
-  - {fileID: 8300000, guid: 35a3d23ab660af84894c8a5633c3e094, type: 3}
-  - {fileID: 8300000, guid: 530c25259078b8842ba6077c783b229a, type: 3}
-  - {fileID: 8300000, guid: 14dee9421609dcb468e83858b603a1aa, type: 3}
+  - {fileID: 8300000, guid: 9cd21a1096cd99d4c87c2aa9a7a88008, type: 3}
+  - {fileID: 8300000, guid: 758624c5eba40104e9db01022c5d7237, type: 3}
+  - {fileID: 8300000, guid: 4c0fdd66457981a41bd76081a67ff772, type: 3}
 --- !u!82 &-3181289368577204536
 AudioSource:
   m_ObjectHideFlags: 0
