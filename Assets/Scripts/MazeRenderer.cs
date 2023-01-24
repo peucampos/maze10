@@ -14,6 +14,7 @@ public class MazeRenderer : MonoBehaviour
     private Transform verticalWallPrefab = null;
 
     [SerializeField]
+    private GameObject characterObj = null;
     private Transform character = null;
 
     [SerializeField]
@@ -34,9 +35,6 @@ public class MazeRenderer : MonoBehaviour
     [SerializeField]
     private TMP_Text time;
 
-    [SerializeField]
-    private RectTransform fader;
-
     public static bool noTime = false;
     public static Transform exitDoor = null;
     
@@ -51,6 +49,8 @@ public class MazeRenderer : MonoBehaviour
         width = height = OpenDoor.level;
         var maze = MazeGenerator.Generate(width, height);
         Draw(maze);
+        
+        LeanTween.scale(characterObj, new Vector3(1,1,1), 0.5f);
     }
 
     private void Update() 
@@ -83,6 +83,7 @@ public class MazeRenderer : MonoBehaviour
 
     private void Draw(WallState[,] maze)
     {
+        character = characterObj.transform;
         //randomly spawn door
         Position doorSpawnPos = DefineDoorPosition();
         //spawn char at the oposite side of the maze
@@ -100,6 +101,7 @@ public class MazeRenderer : MonoBehaviour
                 // spawn char
                 if (charSpawnPos.X == i && charSpawnPos.Y == j)
                     character.position = new Vector3(position.x, position.y, character.position.z);
+                
 
                 //spawn floor
                 var floor = Instantiate(floorSelected, transform) as Transform;

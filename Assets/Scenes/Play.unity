@@ -301,7 +301,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583869903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -826,7 +826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalWallPrefab: {fileID: 1052354362653298133, guid: b1f64d9a7579467428808eeb725c6f36, type: 3}
   verticalWallPrefab: {fileID: 7735714902438983583, guid: b019fc7634437ef4d8093ed8e1e40d6a, type: 3}
-  character: {fileID: 1771911836}
+  characterObj: {fileID: 1771911834}
   doorPrefab: {fileID: 4057148647991142696, guid: 91f4e47bedfd5fa439a71ee23bc7d698, type: 3}
   floorPrefabs:
   - {fileID: 4887237291646153962, guid: 23ae0ea8ba7422b45b12a3aa7e9d763a, type: 3}
@@ -836,7 +836,6 @@ MonoBehaviour:
   level: {fileID: 1984205146}
   score: {fileID: 1193940170}
   time: {fileID: 1575774556}
-  fader: {fileID: 583869904}
 --- !u!82 &1492706105
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1231,7 +1230,7 @@ Transform:
   m_GameObject: {fileID: 1771911834}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1800073119}

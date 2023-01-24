@@ -22,10 +22,13 @@ public class MenuActions : MonoBehaviour
     private bool isPaused = false;
         
     private void Start() {
-        fader.gameObject.SetActive(true);
-        LeanTween.alpha(fader, 0f, 1f).setOnComplete(() => {
-            fader.gameObject.SetActive(false);
-        });
+        if (OpenDoor.level == 1)
+        {
+            fader.gameObject.SetActive(true);
+            LeanTween.alpha(fader, 0f, 1f).setOnComplete(() => {
+                fader.gameObject.SetActive(false);
+            });
+        }
         if (soundToggle != null)
             soundToggle.isOn = SoundManager.soundOn;
         
@@ -49,13 +52,6 @@ public class MenuActions : MonoBehaviour
     
     public void SoundBtn(bool value){
         SoundManager.soundOn = value;
-    }
-
-    public void GameOverBackBtn(){
-        fader.gameObject.SetActive(true);
-        LeanTween.alpha(fader, 1f, 1f).setOnComplete(() => {
-            SceneManager.LoadScene(0);            
-        });
     }
 
     public void PauseBtn()
