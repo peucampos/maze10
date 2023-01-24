@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
 
         //indication arrow
         Vector2 dir = MazeRenderer.exitDoor.position - targetIndicator.transform.position;
-        if (Mathf.Abs(dir.x) + Mathf.Abs(dir.y) > 20)
+        if (Mathf.Abs(dir.x) + Mathf.Abs(dir.y) > 25)
         {
             arrow.GetComponent<Renderer>().enabled = true;
             float angle = 0;
