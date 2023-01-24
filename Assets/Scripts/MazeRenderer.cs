@@ -18,6 +18,9 @@ public class MazeRenderer : MonoBehaviour
 
     [SerializeField]
     private Transform doorPrefab = null;
+
+    [SerializeField]
+    private Transform[] floorPrefabs = null;
     
     [SerializeField]
     private TMP_Text level;
@@ -92,17 +95,23 @@ public class MazeRenderer : MonoBehaviour
         //randomly spawn char and door
         Position charSpawnPos = new Position { X = Random.Range(0, width-1), Y =  Random.Range(0, height-1) };
         Position doorSpawnPos = DefineDoorPosition();
+        Transform floorSelected = floorPrefabs[Random.Range(0, floorPrefabs.Length)];
 
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
                 var cell = maze[i,j];
-                var position = new Vector3((-width/2 + i)*size, (-height/2 + j)*size, 1);
+                var position = new Vector3((-width/2 + i)*size, (-height/2 + j)*size, 0);
                 
                 // spawn char
                 if (charSpawnPos.X == i && charSpawnPos.Y == j)
                     character.position = new Vector3(position.x, position.y, character.position.z);
+
+                //spawn floor
+                var floor = Instantiate(floorSelected, transform) as Transform;
+                floor.position = new Vector3(position.x, position.y, floor.position.z);
+                floor.localScale = new Vector3(size, size, floor.localScale.z);
 
                 if (cell.HasFlag(WallState.UP))
                 {

@@ -20,7 +20,7 @@ public class OpenDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         level++;
-        time += 10f;
+        time += 10f + (level - 2);
         SceneManager.LoadScene(1);
     }
 }
