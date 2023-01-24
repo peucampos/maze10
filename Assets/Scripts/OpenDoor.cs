@@ -13,7 +13,7 @@ public class OpenDoor : MonoBehaviour
     AudioClip[] audioClipArray;
 
     private void Awake() {
-        if (level > 3)
+        if (level > 1)
         {
             SoundManager.PlaySound(audioClipArray[Random.Range(0, audioClipArray.Length)], 0.5f);
         }

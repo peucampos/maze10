@@ -68,7 +68,7 @@ public class MazeRenderer : MonoBehaviour
             level.text = OpenDoor.level.ToString();
             score.text = OpenDoor.score.ToString();
 
-            if (OpenDoor.level > 3 && OpenDoor.time < 10 && !drumsPlayed)
+            if (OpenDoor.level > 2 && OpenDoor.time < 10 && !drumsPlayed)
             {
                 SoundManager.PlaySound(audioDrums[Random.Range(0,audioDrums.Length)]);
                 drumsPlayed = true;
@@ -83,9 +83,6 @@ public class MazeRenderer : MonoBehaviour
         else
         {
             SoundManager.PlaySound(audioDeath[Random.Range(0,audioDeath.Length)]); 
-            OpenDoor.time = 10;
-            OpenDoor.level = 1;      
-            OpenDoor.score = 0;           
             SceneManager.LoadScene(2);      
         }
             
