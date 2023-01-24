@@ -35,6 +35,9 @@ public class MazeRenderer : MonoBehaviour
     [SerializeField]
     private TMP_Text time;
 
+    [SerializeField]
+    private GameObject adPanel;
+
     public static bool noTime = false;
     public static Transform exitDoor = null;
     
@@ -42,7 +45,8 @@ public class MazeRenderer : MonoBehaviour
     private int width;
     private int height;
     private float size = 5;
-    
+    private bool adWatched = false;
+
     // Start is called before the first frame update
     void Start()
     {   
@@ -67,9 +71,22 @@ public class MazeRenderer : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(2);      
+            if (adWatched)
+                SceneManager.LoadScene(2);      
+            else
+            {
+                adPanel.SetActive(true);
+                Time.timeScale = 0;
+            }            
         }
             
+    }
+    
+    public void AdForTimeBtn(bool value){
+        OpenDoor.time += 10;
+        adPanel.SetActive(false);
+        adWatched = true;
+        Time.timeScale = 1;
     }
 
     void SpawnDoor(Vector3 position)
