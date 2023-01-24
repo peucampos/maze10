@@ -14,6 +14,9 @@ public class MenuActions : MonoBehaviour
     private TMP_Text pauseText;
 
     [SerializeField]
+    private TMP_Text versionText;
+
+    [SerializeField]
     private Toggle soundToggle;
 
     private bool isPaused = false;
@@ -25,6 +28,9 @@ public class MenuActions : MonoBehaviour
         });
         if (soundToggle != null)
             soundToggle.isOn = SoundManager.soundOn;
+        
+        if (versionText != null)
+            versionText.text = "v" + Application.version;
     }
 
     public void PlayBtn(){
