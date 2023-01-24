@@ -29,6 +29,9 @@ public class MazeRenderer : MonoBehaviour
     private TMP_Text level;
     
     [SerializeField]
+    private TMP_Text score;
+
+    [SerializeField]
     private TMP_Text time;
 
     [SerializeField]
@@ -62,7 +65,8 @@ public class MazeRenderer : MonoBehaviour
         {
             OpenDoor.time -= Time.deltaTime;
             time.text = OpenDoor.time.ToString("0");
-            level.text = (OpenDoor.level-2).ToString();
+            level.text = OpenDoor.level.ToString();
+            score.text = OpenDoor.score.ToString();
 
             if (OpenDoor.level > 3 && OpenDoor.time < 10 && !drumsPlayed)
             {
@@ -80,16 +84,19 @@ public class MazeRenderer : MonoBehaviour
         {
             SoundManager.PlaySound(audioDeath[Random.Range(0,audioDeath.Length)]); 
             OpenDoor.time = 10;
-            OpenDoor.level = 3;                 
+            OpenDoor.level = 1;      
+            OpenDoor.score = 0;           
             SceneManager.LoadScene(2);      
         }
             
     }
 
-    void SpawnDoor(Transform wall)
+    void SpawnDoor(Vector3 position)
     {
         exitDoor = Instantiate(doorPrefab);
-        exitDoor.position = new Vector3(wall.position.x, wall.position.y, exitDoor.position.z);
+        var randXpos = Random.Range(0,1) == 0 ? -1 : 1;
+        var randYpos = Random.Range(0,1) == 0 ? -1 : 1;
+        exitDoor.position = new Vector3(position.x+randXpos, position.y+randXpos, exitDoor.position.z);
         doorSpawned = true;
     }
 
@@ -110,11 +117,6 @@ public class MazeRenderer : MonoBehaviour
                 // spawn char
                 if (charSpawnPos.X == i && charSpawnPos.Y == j)
                     character.position = new Vector3(position.x, position.y, character.position.z);
-                else
-                {
-                    var pickup = Instantiate(pickupPrefabs, transform) as Transform;
-                    pickup.position = new Vector3(position.x, position.y, pickup.position.z);    
-                }
 
                 //spawn floor
                 var floor = Instantiate(floorSelected, transform) as Transform;
@@ -128,7 +130,7 @@ public class MazeRenderer : MonoBehaviour
                     topWall.localScale = new Vector3(size, topWall.localScale.y, topWall.localScale.z);
 
                     if (!doorSpawned && j == height-1 && doorSpawnPos.X == i && doorSpawnPos.Y == j)
-                        SpawnDoor(topWall);
+                        SpawnDoor(position);
                 }
 
                 if (cell.HasFlag(WallState.LEFT))
@@ -138,7 +140,7 @@ public class MazeRenderer : MonoBehaviour
                     leftWall.localScale = new Vector3(leftWall.localScale.y, size, leftWall.localScale.z);
 
                     if (!doorSpawned && i == 0 && doorSpawnPos.X == i && doorSpawnPos.Y == j)
-                        SpawnDoor(leftWall);
+                        SpawnDoor(position);
                 }
 
                 if (i == width - 1)
@@ -150,7 +152,7 @@ public class MazeRenderer : MonoBehaviour
                         rightWall.localScale = new Vector3(rightWall.localScale.y, size, rightWall.localScale.z);
 
                         if (!doorSpawned && doorSpawnPos.X == i && doorSpawnPos.Y == j)
-                            SpawnDoor(rightWall);
+                            SpawnDoor(position);
                     }
                 }
 
@@ -163,7 +165,7 @@ public class MazeRenderer : MonoBehaviour
                         bottomWall.localScale = new Vector3(size, bottomWall.localScale.y, bottomWall.localScale.z);
 
                         if (!doorSpawned && doorSpawnPos.X == i && doorSpawnPos.Y == j)
-                            SpawnDoor(bottomWall);
+                            SpawnDoor(position);
                     }
                 }
             }

@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class OpenDoor : MonoBehaviour
 {
-    public static int level = 3;
+    public static int level = 1;
     public static float time = 10;
+    public static int score = 0;
 
     [SerializeField]
     AudioClip[] audioClipArray;
@@ -20,7 +21,8 @@ public class OpenDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         level++;
-        time += 10f + (level - 2);
+        time += 10f;
+        score += level * Mathf.RoundToInt(time);
         SceneManager.LoadScene(1);
     }
 }
