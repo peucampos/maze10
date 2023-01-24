@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     private Transform arrow;
     
     [SerializeField]
-    private Camera camera;
+    private Camera playerCamera;
 
     [SerializeField]
     private GameObject sprite;
@@ -41,9 +41,9 @@ public class Player : MonoBehaviour
     {
         //make sure zoom is out for phones in Portrait and Landscape
         if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeRight)
-            camera.orthographicSize = 7.5f;
+            playerCamera.orthographicSize = 7.5f;
         else
-            camera.orthographicSize = 15f;
+            playerCamera.orthographicSize = 15f;
     }
 
     void FixedUpdate()

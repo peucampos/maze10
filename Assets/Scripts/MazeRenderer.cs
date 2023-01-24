@@ -72,13 +72,10 @@ public class MazeRenderer : MonoBehaviour
         }
         else
         {
-            SoundManager.PlaySound(audioDeath[Random.Range(0,audioDeath.Length)]);            
-            SceneManager.LoadScene(2);            
-            // fader.gameObject.SetActive(true);     
-            // LeanTween.alpha(fader, 1f, 1f).setOnComplete(() => {                
-            //     OpenDoor.time = 10;
-            //     OpenDoor.level = 3;
-            // });
+            SoundManager.PlaySound(audioDeath[Random.Range(0,audioDeath.Length)]); 
+            OpenDoor.time = 10;
+            OpenDoor.level = 3;                 
+            SceneManager.LoadScene(2);      
         }
             
     }

@@ -828,6 +828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fader: {fileID: 583869904}
   pauseText: {fileID: 670350463}
+  soundToggle: {fileID: 0}
 --- !u!1 &1492706102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,7 +1330,7 @@ MonoBehaviour:
   joystick: {fileID: 867158466179875578}
   targetIndicator: {fileID: 953194670}
   arrow: {fileID: 1836413668}
-  camera: {fileID: 1800073118}
+  playerCamera: {fileID: 1800073118}
   sprite: {fileID: 363080761}
 --- !u!61 &1771911840
 BoxCollider2D:
