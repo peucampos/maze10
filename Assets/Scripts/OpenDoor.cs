@@ -20,7 +20,7 @@ public class OpenDoor : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        score += Mathf.Min((level + 10), Mathf.RoundToInt(time)) + (level * 10);
+        score += Mathf.Min((level + 10) * 3, Mathf.RoundToInt(time * 3)) * level;
         level++;
         time += 10f;
         SceneManager.LoadScene(1);

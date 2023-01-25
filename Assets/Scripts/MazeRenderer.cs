@@ -87,9 +87,14 @@ public class MazeRenderer : MonoBehaviour
             
     }
 
-    public void AdForTimeBtn(bool value)
+    public void AdForTimeBtn()
     {
         LoadAdForReward();
+    }
+    
+    public void AdNoTyBtn()
+    {
+        SceneManager.LoadScene(2);
     }
 
     private RewardedAd rewardedAd;
@@ -99,7 +104,7 @@ public class MazeRenderer : MonoBehaviour
         #if UNITY_ANDROID
             adUnitId = "ca-app-pub-2506757271328786~7523485382";
         #elif UNITY_IPHONE
-            adUnitId = "ca-app-pub-3940256099942544/1712485313";
+            adUnitId = "ca-app-pub-2506757271328786/3923151722";
         #else
             adUnitId = "unexpected_platform";
         #endif

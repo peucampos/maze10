@@ -20,6 +20,7 @@ public class GameOver : MonoBehaviour
 
     void Start()
     {
+            Time.timeScale = 1;
             fader.gameObject.SetActive(true);
             LeanTween.alpha(fader, 0f, 1f).setOnComplete(() => {
                 fader.gameObject.SetActive(false);

@@ -41,9 +41,9 @@ public class Player : MonoBehaviour
     {
         //make sure zoom is out for phones in Portrait and Landscape
         if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeRight)
-            playerCamera.orthographicSize = 7.5f;
+            playerCamera.orthographicSize = 10f;
         else
-            playerCamera.orthographicSize = 15f;
+            playerCamera.orthographicSize = 20f;
     }
 
     void FixedUpdate()
