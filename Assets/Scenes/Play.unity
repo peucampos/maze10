@@ -870,6 +870,7 @@ MonoBehaviour:
   score: {fileID: 1193940170}
   time: {fileID: 1575774556}
   adPanel: {fileID: 1325483275}
+  adButtonText: {fileID: 1512263735}
 --- !u!82 &1492706105
 AudioSource:
   m_ObjectHideFlags: 0
@@ -978,7 +979,7 @@ GameObject:
   - component: {fileID: 1512263736}
   - component: {fileID: 1512263735}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AdButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

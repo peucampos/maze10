@@ -1,8 +1,10 @@
+using Sys = System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using GoogleMobileAds.Api;
 using TMPro;
 
 public class MazeRenderer : MonoBehaviour
@@ -37,6 +39,8 @@ public class MazeRenderer : MonoBehaviour
 
     [SerializeField]
     private GameObject adPanel;
+    [SerializeField]
+    private TMP_Text adButtonText;
 
     public static bool noTime = false;
     public static Transform exitDoor = null;
@@ -75,15 +79,62 @@ public class MazeRenderer : MonoBehaviour
                 SceneManager.LoadScene(2);      
             else
             {
+                adButtonText.text = (10 + OpenDoor.level).ToString() + " more seconds?";
                 adPanel.SetActive(true);
                 Time.timeScale = 0;
             }            
         }
             
     }
+
+    public void AdForTimeBtn(bool value)
+    {
+        LoadAdForReward();
+    }
+
+    private RewardedAd rewardedAd;
+    public void LoadAdForReward()
+    {
+        string adUnitId;
+        #if UNITY_ANDROID
+            adUnitId = "ca-app-pub-2506757271328786~7523485382";
+        #elif UNITY_IPHONE
+            adUnitId = "ca-app-pub-3940256099942544/1712485313";
+        #else
+            adUnitId = "unexpected_platform";
+        #endif
+
+        rewardedAd = new RewardedAd(adUnitId);
     
-    public void AdForTimeBtn(bool value){
-        OpenDoor.time += 10;
+        // Called when the user should be rewarded for interacting with the ad.
+        rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+        
+        // // Called when an ad request has successfully loaded.
+        // rewardedAd.OnAdLoaded += (object sender, Sys.EventArgs args) => Debug.Log("HandleRewardedAdLoaded event received");
+    
+        // // Called when an ad request failed to load.
+        // rewardedAd.OnAdFailedToLoad += (object sender, AdFailedToLoadEventArgs args) => Debug.Log("HandleRewardedAdFailedToLoad event received with message: "+ args);
+        // // Called when an ad is shown.
+        // rewardedAd.OnAdOpening += (object sender, Sys.EventArgs args) => Debug.Log("HandleRewardedAdOpening event received");
+        // // Called when an ad request failed to show.
+        // rewardedAd.OnAdFailedToShow += (object sender, AdErrorEventArgs args) =>  Debug.Log("HandleRewardedAdFailedToShow event received with message: " + args.Message);
+        
+        // // Called when the ad is closed.
+        // rewardedAd.OnAdClosed += (object sender, Sys.EventArgs args) => Debug.Log("HandleRewardedAdClosed event received");
+
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+        // Load the rewarded ad with the request.
+        rewardedAd.LoadAd(request);
+
+        if (rewardedAd.IsLoaded()) {
+            rewardedAd.Show();
+        }
+    }
+
+    void HandleUserEarnedReward(object sender, Reward args)
+    {
+        OpenDoor.time += (float)args.Amount + OpenDoor.level;
         adPanel.SetActive(false);
         adWatched = true;
         Time.timeScale = 1;
@@ -92,9 +143,12 @@ public class MazeRenderer : MonoBehaviour
     void SpawnDoor(Vector3 position)
     {
         exitDoor = Instantiate(doorPrefab);
-        var randXpos = Random.Range(0,1) == 0 ? -1 : 1;
-        var randYpos = Random.Range(0,1) == 0 ? -1 : 1;
-        exitDoor.position = new Vector3(position.x+randXpos, position.y+randXpos, exitDoor.position.z);
+        var randXpos = Random.Range(0,1) == 0 ? -1f : 1f;
+        var randYpos = Random.Range(0,1) == 0 ? -1f : 1f;
+        if (OpenDoor.level == 1)
+            exitDoor.position = new Vector3(position.x+(randXpos*2), position.y+(randXpos*2), exitDoor.position.z);
+        else
+            exitDoor.position = new Vector3(position.x+randXpos, position.y+randXpos, exitDoor.position.z);
         doorSpawned = true;
     }
 
