@@ -6,7 +6,7 @@ using GooglePlayGames.BasicApi;
 
 public class GameManager : MonoBehaviour
 {
-    bool isConnectedToGooglePlayServices = false;
+    public static bool isConnectedToGooglePlayServices = false;
 
     private void Awake() {
         PlayGamesPlatform.DebugLogEnabled = true;
@@ -21,11 +21,9 @@ public class GameManager : MonoBehaviour
     void SignInToGooglePlayServices()
     {
         PlayGamesPlatform.Instance.Authenticate( 
-            (status) => {
-                if (status == SignInStatus.Success)
-                        Debug.Log("Login Success");
-                else
-                        Debug.Log("Login Failed");            
+            (status) => 
+            {
+                isConnectedToGooglePlayServices = (status == SignInStatus.Success);
             });
     }
 }
