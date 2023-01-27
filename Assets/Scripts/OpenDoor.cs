@@ -7,7 +7,7 @@ public class OpenDoor : MonoBehaviour
 {
     public static int level = 1;
     public static float time = 10;
-    public static int score = 0;
+    public static long score = 0;
 
     [SerializeField]
     AudioClip[] audioClipArray;
@@ -20,9 +20,9 @@ public class OpenDoor : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        score += Mathf.Min((level + 10) * 3, Mathf.RoundToInt(time * 3)) * level;
+        score += (level * 50) + (Mathf.RoundToInt(time) * level);
         level++;
-        time += 10f;
+        time += level + 10;
         SceneManager.LoadScene(1);
     }
 }

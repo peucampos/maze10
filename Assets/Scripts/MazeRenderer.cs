@@ -79,7 +79,7 @@ public class MazeRenderer : MonoBehaviour
                 SceneManager.LoadScene(2);      
             else
             {
-                adButtonText.text = (10 + OpenDoor.level).ToString() + " more seconds?";
+                adButtonText.text = ("Watch to get more seconds?");
                 adPanel.SetActive(true);
                 Time.timeScale = 0;
             }            
@@ -139,7 +139,7 @@ public class MazeRenderer : MonoBehaviour
 
     void HandleUserEarnedReward(object sender, Reward args)
     {
-        OpenDoor.time += (float)args.Amount + OpenDoor.level;
+        OpenDoor.time += (float)args.Amount;
         adPanel.SetActive(false);
         adWatched = true;
         Time.timeScale = 1;

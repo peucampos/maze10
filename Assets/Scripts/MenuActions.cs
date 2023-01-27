@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms;
 using TMPro;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
@@ -17,9 +18,6 @@ public class MenuActions : MonoBehaviour
 
     [SerializeField]
     private TMP_Text pauseText;
-
-    [SerializeField]
-    private TMP_Text highScoresText;
 
     [SerializeField]
     private TMP_Text versionText;
@@ -42,9 +40,6 @@ public class MenuActions : MonoBehaviour
         
         if (versionText != null)
             versionText.text = "Alpha v" + Application.version;
-        
-        if (highScoresText != null)
-            LoadHighScores();
     }
 
     public void PlayBtn(){
@@ -73,18 +68,14 @@ public class MenuActions : MonoBehaviour
         pauseText.text = isPaused ? "PAUSED" : "";
     }
 
-    public void LoadHighScores()
+    public void HighScoresBtn()
     {
         if (GameManager.isConnectedToGooglePlayServices)
         {
-            // Social.ReportScore(SaveManager.Instance.save.Hightscore, GPGSIds.leaderboard_top_score, 
-            //     (success) => 
-            //     {
-            //         if (!success) highScoresText.text = "Unable to fetch High Scores.";
-            //     });
+            Social.ShowLeaderboardUI();
         }
         else
-            highScoresText.text = "Not connected to Google Play Services.";
+            Debug.Log(" MenuActions.cs - Not connected to Google Play Services.");
     }
 
 }
