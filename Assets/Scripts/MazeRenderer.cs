@@ -102,9 +102,9 @@ public class MazeRenderer : MonoBehaviour
     {
         string adUnitId;
         #if UNITY_ANDROID
-            adUnitId = "ca-app-pub-2506757271328786~7523485382";
+            adUnitId = "ca-app-pub-3940256099942544/5224354917";//"ca-app-pub-2506757271328786~7523485382";
         #elif UNITY_IPHONE
-            adUnitId = "ca-app-pub-2506757271328786/3923151722";
+            adUnitId = "ca-app-pub-3940256099942544/5224354917";//"ca-app-pub-2506757271328786/3923151722";
         #else
             adUnitId = "unexpected_platform";
         #endif
