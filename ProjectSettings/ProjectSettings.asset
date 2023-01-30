@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: Marmanjo Game Studio
+  companyName: Maze Games
   productName: Maze Escape
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -134,8 +134,10 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.8
-  preloadedAssets: []
+  bundleVersion: 0.89
+  preloadedAssets:
+  - {fileID: -7229515979725159955, guid: 49f42035b541ef84ca07190794ecd982, type: 2}
+  - {fileID: 11400000, guid: 3fa6c2e72d2a51c4d9357c160189bded, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -165,7 +167,7 @@ PlayerSettings:
     iPhone: 0
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 2
+  AndroidBundleVersionCode: 3
   AndroidMinSdkVersion: 22
   AndroidTargetSdkVersion: 32
   AndroidPreferredInstallLocation: 1
