@@ -102,9 +102,9 @@ public class MazeRenderer : MonoBehaviour
     {
         string adUnitId;
         #if UNITY_ANDROID
-            adUnitId = "ca-app-pub-3940256099942544/5224354917";//"ca-app-pub-2506757271328786~7523485382";
+            adUnitId = GameManager.ANDROID_AD_KEY;
         #elif UNITY_IPHONE
-            adUnitId = "ca-app-pub-3940256099942544/5224354917";//"ca-app-pub-2506757271328786/3923151722";
+            adUnitId = GameManager.IOS_AD_KEY;
         #else
             adUnitId = "unexpected_platform";
         #endif
@@ -114,18 +114,18 @@ public class MazeRenderer : MonoBehaviour
         // Called when the user should be rewarded for interacting with the ad.
         rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
         
-        // // Called when an ad request has successfully loaded.
-        // rewardedAd.OnAdLoaded += (object sender, Sys.EventArgs args) => Debug.Log("HandleRewardedAdLoaded event received");
+        // Called when an ad request has successfully loaded.
+        rewardedAd.OnAdLoaded += (object sender, Sys.EventArgs args) => Debug.Log("HandleRewardedAdLoaded event received");
     
-        // // Called when an ad request failed to load.
-        // rewardedAd.OnAdFailedToLoad += (object sender, AdFailedToLoadEventArgs args) => Debug.Log("HandleRewardedAdFailedToLoad event received with message: "+ args);
-        // // Called when an ad is shown.
-        // rewardedAd.OnAdOpening += (object sender, Sys.EventArgs args) => Debug.Log("HandleRewardedAdOpening event received");
-        // // Called when an ad request failed to show.
-        // rewardedAd.OnAdFailedToShow += (object sender, AdErrorEventArgs args) =>  Debug.Log("HandleRewardedAdFailedToShow event received with message: " + args.Message);
+        // Called when an ad request failed to load.
+        rewardedAd.OnAdFailedToLoad += (object sender, AdFailedToLoadEventArgs args) => Debug.Log("HandleRewardedAdFailedToLoad event received with message: "+ args);
+        // Called when an ad is shown.
+        rewardedAd.OnAdOpening += (object sender, Sys.EventArgs args) => Debug.Log("HandleRewardedAdOpening event received");
+        // Called when an ad request failed to show.
+        rewardedAd.OnAdFailedToShow += (object sender, AdErrorEventArgs args) =>  Debug.Log("HandleRewardedAdFailedToShow event received with message: " + args.Message);
         
-        // // Called when the ad is closed.
-        // rewardedAd.OnAdClosed += (object sender, Sys.EventArgs args) => Debug.Log("HandleRewardedAdClosed event received");
+        // Called when the ad is closed.
+        rewardedAd.OnAdClosed += (object sender, Sys.EventArgs args) => Debug.Log("HandleRewardedAdClosed event received");
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();

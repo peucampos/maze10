@@ -39,7 +39,7 @@ public class MenuActions : MonoBehaviour
             soundToggle.isOn = SoundManager.soundOn;
         
         if (versionText != null)
-            versionText.text = "Alpha v" + Application.version;
+            versionText.text = "v" + Application.version;
     }
 
     public void PlayBtn(){

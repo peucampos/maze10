@@ -582,8 +582,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 368943821}
-  - component: {fileID: 368943822}
   - component: {fileID: 368943823}
+  - component: {fileID: 368943822}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -632,6 +632,7 @@ MonoBehaviour:
   fader: {fileID: 975542373}
   pauseText: {fileID: 0}
   versionText: {fileID: 2123702183}
+  highScoreText: {fileID: 2118719866}
   soundToggle: {fileID: 604215600}
 --- !u!114 &368943823
 MonoBehaviour:

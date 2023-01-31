@@ -38,7 +38,7 @@ public class GameOver : MonoBehaviour
 
             if (GameManager.isConnectedToGooglePlayServices)
             {
-                long oldHighScore = 0;
+                long oldHighScore = -1;
 
                 PlayGamesPlatform.Instance.LoadScores(
                             GameManager.leaderboardID,
@@ -54,7 +54,7 @@ public class GameOver : MonoBehaviour
                                     Debug.Log("GameOver.cs - Player high score data invalid.");                                    
                             });
                 
-                if (OpenDoor.score > oldHighScore)
+                if (oldHighScore > -1 && OpenDoor.score > oldHighScore)
                 {
                     Social.ReportScore(OpenDoor.score, GameManager.leaderboardID, 
                         (success) => 
