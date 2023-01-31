@@ -11,6 +11,11 @@ using GoogleMobileAds.Common;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 
+// COLOR PALLETE
+//Button Collor - 79381E
+//Gradient - B93908 to FFA35C
+//Text - FFA35C
+
 public class MenuActions : MonoBehaviour
 {
     [SerializeField]
@@ -18,9 +23,6 @@ public class MenuActions : MonoBehaviour
 
     [SerializeField]
     private TMP_Text pauseText;
-
-    [SerializeField]
-    private TMP_Text versionText;
 
     [SerializeField]
     private Toggle soundToggle;
@@ -37,9 +39,6 @@ public class MenuActions : MonoBehaviour
         }
         if (soundToggle != null)
             soundToggle.isOn = SoundManager.soundOn;
-        
-        if (versionText != null)
-            versionText.text = "v" + Application.version;
     }
 
     public void PlayBtn(){
