@@ -42,6 +42,9 @@ public class MazeRenderer : MonoBehaviour
     [SerializeField]
     private TMP_Text adButtonText;
 
+    [SerializeField]
+    private bool adsActive = false;
+
     public static bool noTime = false;
     public static Transform exitDoor = null;
     
@@ -75,14 +78,19 @@ public class MazeRenderer : MonoBehaviour
         }
         else
         {
-            if (adWatched)
-                SceneManager.LoadScene(2);      
-            else
+            if (adsActive)
             {
-                adButtonText.text = ("Watch to get more seconds?");
-                adPanel.SetActive(true);
-                Time.timeScale = 0;
-            }            
+                if (adWatched)
+                    SceneManager.LoadScene(2);      
+                else
+                {
+                    adButtonText.text = ("Watch to get more seconds?");
+                    adPanel.SetActive(true);
+                    Time.timeScale = 0;
+                }            
+            }
+            else
+                SceneManager.LoadScene(2);
         }
             
     }
