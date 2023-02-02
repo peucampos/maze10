@@ -30,6 +30,7 @@ public class MenuActions : MonoBehaviour
     private bool isPaused = false;
         
     private void Start() {
+        //fader only on first level, the others will be shrink animation
         if (OpenDoor.level == 1)
         {
             fader.gameObject.SetActive(true);
@@ -37,8 +38,9 @@ public class MenuActions : MonoBehaviour
                 fader.gameObject.SetActive(false);
             });
         }
+        // if on Main Menu
         if (soundToggle != null)
-            soundToggle.isOn = SoundManager.soundOn;
+            soundToggle.isOn = SoundManager.soundOn;        
     }
 
     public void PlayBtn(){
@@ -69,12 +71,36 @@ public class MenuActions : MonoBehaviour
 
     public void HighScoresBtn()
     {
-        if (GameManager.isConnectedToGooglePlayServices)
-        {
-            Social.ShowLeaderboardUI();
-        }
-        else
-            Debug.Log(" MenuActions.cs - Not connected to Google Play Services.");
+        PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
     }
 
+    internal void ProcessAuthentication(SignInStatus status) {
+        if (status == SignInStatus.Success) {
+            GameManager.isConnectedToGooglePlayServices = true;
+
+            if (GameManager.isConnectedToGooglePlayServices)
+            {
+                Social.ShowLeaderboardUI();
+            }
+            else
+            {
+                PlayGamesPlatform.Instance.ManuallyAuthenticate(ManualAuthentication);
+            }
+        } 
+        else 
+        {
+            Debug.Log("MenuActions.cs - Google Play Services failed. Trying manually.");
+            PlayGamesPlatform.Instance.ManuallyAuthenticate(ManualAuthentication);
+        }
+    }
+
+    internal void ManualAuthentication(SignInStatus status) {
+        if (status == SignInStatus.Success)
+        {
+            GameManager.isConnectedToGooglePlayServices = true;
+            Social.ShowLeaderboardUI();
+        }
+        else         
+            Debug.Log("MenuActions.cs - Manual Google Play Services failed.");
+    }
 }
